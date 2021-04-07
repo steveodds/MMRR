@@ -64,6 +64,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="itext7">
+      <Version>7.1.14</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.ProjectReunion" Version="[0.5.0]">
       <IncludeAssets>build</IncludeAssets>
     </PackageReference>
