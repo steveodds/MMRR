@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using muxc = Microsoft.UI.Xaml.Controls;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -28,9 +29,26 @@ namespace Mobile_Money_Records_Reconciliator
             this.InitializeComponent();
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private double NavViewCompactModeThresholdWidth { get { return NavView.CompactModeThresholdWidth; } }
+
+        private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
-            myButton.Content = "Clicked";
+           //throw new NotImplementedException();
+        }
+
+        private void NavView_ItemInvoked(muxc.NavigationView sender, muxc.NavigationViewItemInvokedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void NavView_BackRequested(muxc.NavigationView sender, muxc.NavigationViewBackRequestedEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
     }
 }

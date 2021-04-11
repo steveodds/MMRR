@@ -5,11 +5,61 @@
     xmlns:local="using:Mobile_Money_Records_Reconciliator"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
 
     <Grid Background="{ThemeResource RegionBrush}">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-        </StackPanel>
+        <muxc:NavigationView x:Name="NavView"
+                         Loaded="NavView_Loaded"
+                         ItemInvoked="NavView_ItemInvoked"
+                         BackRequested="NavView_BackRequested">
+            <muxc:NavigationView.MenuItems>
+                <muxc:NavigationViewItem Tag="home" Icon="Home" Content="Start"/>
+                <muxc:NavigationViewItemSeparator/>
+                <muxc:NavigationViewItemHeader x:Name="MainPagesHeader"
+                                           Content="Main pages"/>
+                <muxc:NavigationViewItem Tag="apps" Content="Apps">
+                    <muxc:NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB3C;"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                <muxc:NavigationViewItem Tag="games" Content="Games">
+                    <muxc:NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7FC;"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+                <muxc:NavigationViewItem Tag="music" Icon="Audio" Content="Music"/>
+            </muxc:NavigationView.MenuItems>
+
+            <muxc:NavigationView.AutoSuggestBox>
+                <!-- See AutoSuggestBox documentation for
+                 more info about how to implement search. -->
+                <AutoSuggestBox x:Name="NavViewSearchBox" QueryIcon="Find"/>
+            </muxc:NavigationView.AutoSuggestBox>
+
+            <ScrollViewer>
+                <Frame x:Name="ContentFrame" Padding="12,0,12,24" IsTabStop="True"
+                   NavigationFailed="ContentFrame_NavigationFailed"/>
+            </ScrollViewer>
+        </muxc:NavigationView>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger
+                        MinWindowWidth="{x:Bind NavViewCompactModeThresholdWidth}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!-- Remove the next 3 lines for left-only navigation. -->
+                        <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
+                        <Setter Target="NavViewSearchBox.Width" Value="200"/>
+                        <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
+                        <!-- Leave the next line for left-only navigation. -->
+                        <Setter Target="ContentFrame.Padding" Value="24,0,24,24"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Window>
