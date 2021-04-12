@@ -10,56 +10,35 @@
 
     <Grid Background="{ThemeResource RegionBrush}">
         <muxc:NavigationView x:Name="NavView"
+                         PaneDisplayMode="Top"
                          Loaded="NavView_Loaded"
+                         Header="Home"
                          ItemInvoked="NavView_ItemInvoked"
                          BackRequested="NavView_BackRequested">
             <muxc:NavigationView.MenuItems>
-                <muxc:NavigationViewItem Tag="home" Icon="Home" Content="Start"/>
+                <muxc:NavigationViewItem Tag="home" Icon="Home" Content="Dashboard"/>
                 <muxc:NavigationViewItemSeparator/>
                 <muxc:NavigationViewItemHeader x:Name="MainPagesHeader"
-                                           Content="Main pages"/>
-                <muxc:NavigationViewItem Tag="apps" Content="Apps">
+                                           Content="Reconciliation:"/>
+                <muxc:NavigationViewItem Tag="apps" Content="Mpesa Statements">
                     <muxc:NavigationViewItem.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB3C;"/>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE9F9;"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem Tag="games" Content="Games">
+                <muxc:NavigationViewItem Tag="games" Content="Output Options">
                     <muxc:NavigationViewItem.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7FC;"/>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE9D5;"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem Tag="music" Icon="Audio" Content="Music"/>
+                <muxc:NavigationViewItem Tag="music" Content="Finalize/Export">
+                    <muxc:NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF57E;"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
             </muxc:NavigationView.MenuItems>
-
-            <muxc:NavigationView.AutoSuggestBox>
-                <!-- See AutoSuggestBox documentation for
-                 more info about how to implement search. -->
-                <AutoSuggestBox x:Name="NavViewSearchBox" QueryIcon="Find"/>
-            </muxc:NavigationView.AutoSuggestBox>
-
-            <ScrollViewer>
-                <Frame x:Name="ContentFrame" Padding="12,0,12,24" IsTabStop="True"
-                   NavigationFailed="ContentFrame_NavigationFailed"/>
-            </ScrollViewer>
         </muxc:NavigationView>
-
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger
-                        MinWindowWidth="{x:Bind NavViewCompactModeThresholdWidth}"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <!-- Remove the next 3 lines for left-only navigation. -->
-                        <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
-                        <Setter Target="NavViewSearchBox.Width" Value="200"/>
-                        <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
-                        <!-- Leave the next line for left-only navigation. -->
-                        <Setter Target="ContentFrame.Padding" Value="24,0,24,24"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
+        
+        
+        
     </Grid>
 </Window>
