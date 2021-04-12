@@ -9,12 +9,19 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
 
     <Grid Background="{ThemeResource RegionBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <!--<RowDefinition Height="auto"/>-->
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
         <muxc:NavigationView x:Name="NavView"
                          PaneDisplayMode="Top"
                          Loaded="NavView_Loaded"
                          Header="Home"
                          ItemInvoked="NavView_ItemInvoked"
-                         BackRequested="NavView_BackRequested">
+                         BackRequested="NavView_BackRequested"
+                         Grid.Row="0">
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem Tag="home" Icon="Home" Content="Dashboard"/>
                 <muxc:NavigationViewItemSeparator/>
@@ -37,8 +44,66 @@
                 </muxc:NavigationViewItem>
             </muxc:NavigationView.MenuItems>
         </muxc:NavigationView>
-        
-        
-        
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1"
+                    Padding="20">
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid Padding="10"
+                      Grid.Column="0"
+                      HorizontalAlignment="Left">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Transactions Data:" Grid.Row="0" FontWeight="Bold" FontSize="16"/>
+                    <TextBlock Text="Transaction Date Ranges:" Grid.Row="1"/>
+                    <StackPanel Orientation="Vertical"
+                                Grid.Row="2">
+                        <TextBlock Text="N/A"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Padding="10"
+                      Grid.Column="1"
+                      HorizontalAlignment="Left">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Actions:" Grid.Row="0"/>
+                    <Button Content="Quick Re-Export" Grid.Row="1" Margin="5"/>
+                    <Button Content="Modify Last Document" Grid.Row="2" Margin="5"/>
+                    <Button Content="Load New Document" Grid.Row="3" Margin="5"/>
+                    <Button Content="Clear Document History" Grid.Row="4" Margin="5"/>
+                </Grid>
+            </Grid>
+
+            <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Previous documents:"/>
+                    <ListBox Grid.Row="1">
+                        <ListBoxItem Content="You have no previous documents..."/>
+                    </ListBox>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+
     </Grid>
 </Window>
