@@ -75,14 +75,14 @@
                       Grid.Column="1"
                       HorizontalAlignment="Left">
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Actions:" Grid.Row="0"/>
+                    <TextBlock Text="Actions:" Grid.Row="0" FontWeight="Bold" FontSize="16"/>
                     <Button Content="Quick Re-Export" Grid.Row="1" Margin="5"/>
                     <Button Content="Modify Last Document" Grid.Row="2" Margin="5"/>
                     <Button Content="Load New Document" Grid.Row="3" Margin="5"/>
