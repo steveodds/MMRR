@@ -16,7 +16,15 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
             this.pdf = pdf;
         }
 
+        public Models.MpesaRecord ExtractRecords()
+        {
+            return null;
+        }
 
+        public static Models.MpesaRecord ExtractSeveralRecords(List<Models.PDFStatement> pDFStatements)
+        {
+            return null;
+        }
 
     }
 }
