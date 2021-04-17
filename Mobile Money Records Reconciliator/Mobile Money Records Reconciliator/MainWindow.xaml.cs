@@ -50,5 +50,21 @@ namespace Mobile_Money_Records_Reconciliator
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
+
+        //Core Functionality
+        private void SavePDFDetails(string pdfPath)
+        {
+            //TODO: Generate PDF model
+        }
+
+        private void SaveMultiplePDFs(List<string> pdfPaths)
+        {
+            //TODO: Generate Multiple PDF Models
+        }
+
+        private void PDFDetailsToDB(Core.Models.PDFStatement pdfStatement)
+        {
+            //TODO: Save to DB
+        }
     }
 }
