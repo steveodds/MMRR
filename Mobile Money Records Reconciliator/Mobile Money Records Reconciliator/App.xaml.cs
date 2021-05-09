@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using WinRT;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -43,9 +45,23 @@ namespace Mobile_Money_Records_Reconciliator
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
+            //Get the Window's HWND
+            var windowNative = m_window.As<IWindowNative>();
+
+            m_windowHandle = windowNative.WindowHandle;
             m_window.Activate();
         }
 
         private Window m_window;
+        private IntPtr m_windowHandle;
+        public IntPtr WindowHandle { get { return m_windowHandle; } }
+
+        [ComImport]
+        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        [Guid("EECDBF0E-BAE9-4CB6-A68E-9598E1CB57BB")]
+        internal interface IWindowNative
+        {
+            IntPtr WindowHandle { get; }
+        }
     }
 }
