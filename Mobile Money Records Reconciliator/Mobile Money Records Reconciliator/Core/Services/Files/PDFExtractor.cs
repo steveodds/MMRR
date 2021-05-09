@@ -21,8 +21,9 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
             this.pdf = pdf;
         }
 
-        public Models.MpesaRecord ExtractRecords()
+        public Models.MpesaRecord ExtractRecordsAsync()
         {
+            var results = GetAllPDFTextAsync(pdf.StatementPath).Result;
             return null;
         }
 
@@ -32,9 +33,10 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
         }
 
 
-        private StringBuilder GetAllPDFText(string pdfPath)
+        private async Task<StringBuilder> GetAllPDFTextAsync(string pdfPath)
         {
             //TODO: Test
+            await Task.Yield();
             var pageText = new StringBuilder();
             using (PdfDocument pdfDocument = new PdfDocument(new PdfReader(pdfPath)))
             {

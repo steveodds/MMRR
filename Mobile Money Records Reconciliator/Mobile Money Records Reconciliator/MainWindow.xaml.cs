@@ -91,7 +91,7 @@ namespace Mobile_Money_Records_Reconciliator
                 statement.StatementPath = pickedFile.Path;
 
                 var extractor = new Core.Services.Files.PDFExtractor(statement);
-                var result = extractor.ExtractRecords();
+                var result = extractor.ExtractRecordsAsync();
             }
         }
 
