@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using WinRT;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +14,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using muxc = Microsoft.UI.Xaml.Controls;
+using System.Runtime.InteropServices;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -24,9 +26,13 @@ namespace Mobile_Money_Records_Reconciliator
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        //Required models
+        private Core.Models.PDFStatement statement;
+        //End
         public MainWindow()
         {
             this.InitializeComponent();
+            statement = new Core.Models.PDFStatement();
         }
 
         private double NavViewCompactModeThresholdWidth { get { return NavView.CompactModeThresholdWidth; } }
@@ -65,6 +71,36 @@ namespace Mobile_Money_Records_Reconciliator
         private void PDFDetailsToDB(Core.Models.PDFStatement pdfStatement)
         {
             //TODO: Save to DB
+        }
+
+        private async void LoadFile_Click(object sender, RoutedEventArgs e)
+        {
+            var fileDialog = new Windows.Storage.Pickers.FileOpenPicker();
+
+            //Make folder Picker work in Win32
+            IntPtr windowHandle = (App.Current as App).WindowHandle;
+            var initializeWithWindow = fileDialog.As<IInitializeWithWindow>();
+
+            fileDialog.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Downloads;
+            initializeWithWindow.Initialize(windowHandle);
+            fileDialog.FileTypeFilter.Add(".pdf");
+            var pickedFile = await fileDialog.PickSingleFileAsync();
+            if (pickedFile is not null)
+            {
+                statement.FileName = pickedFile.Name;
+                statement.StatementPath = pickedFile.Path;
+
+                var extractor = new Core.Services.Files.PDFExtractor(statement);
+                var result = extractor.ExtractRecords();
+            }
+        }
+
+        [ComImport]
+        [Guid("3E68D4BD-7135-4D10-8018-9FB6D9F33FA1")]
+        [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        public interface IInitializeWithWindow
+        {
+            void Initialize(IntPtr hwnd);
         }
     }
 }

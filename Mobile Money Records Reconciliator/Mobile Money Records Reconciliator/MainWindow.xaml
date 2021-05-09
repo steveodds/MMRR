@@ -83,7 +83,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="Actions:" Grid.Row="0" FontWeight="Bold" FontSize="16"/>
-                    <Button Content="Load New Document" Grid.Row="1" Margin="5"/>
+                    <Button Content="Load New Document" Click="LoadFile_Click" Grid.Row="1" Margin="5"/>
                     <Button Content="Quick Re-Export" Grid.Row="2" Margin="5"/>
                     <Button Content="Modify Last Document" Grid.Row="3" Margin="5"/>
                     <Button Content="Clear Document History" Grid.Row="4" Margin="5"/>
