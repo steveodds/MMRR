@@ -15,6 +15,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using muxc = Microsoft.UI.Xaml.Controls;
 using System.Runtime.InteropServices;
+using Windows.UI.Popups;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -39,7 +40,7 @@ namespace Mobile_Money_Records_Reconciliator
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
-           //throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void NavView_ItemInvoked(muxc.NavigationView sender, muxc.NavigationViewItemInvokedEventArgs args)
@@ -89,10 +90,27 @@ namespace Mobile_Money_Records_Reconciliator
             {
                 statement.FileName = pickedFile.Name;
                 statement.StatementPath = pickedFile.Path;
-
-                var extractor = new Core.Services.Files.PDFExtractor(statement);
-                var result = extractor.ExtractRecordsAsync();
+                UpdateFiles(windowHandle);
             }
+        }
+
+        private async void UpdateFiles(IntPtr windowHandle)
+        {
+            IInitializeWithWindow initializeWithWindow;
+            var extractor = new Core.Services.Files.PDFExtractor(statement);
+            var result = extractor.ExtractRecordsAsync();
+
+            //TODO set MessageBox to match app scheme
+            var message = new MessageDialog("File has been successfully loaded!", "File Loaded");
+            initializeWithWindow = message.As<IInitializeWithWindow>();
+            initializeWithWindow.Initialize(windowHandle);
+            await message.ShowAsync();
+            if (!Docs.IsEnabled)
+            {
+                Docs.IsEnabled = true;
+                Docs.Items.Clear();
+            }
+            Docs.Items.Add(statement.FileName);
         }
 
         [ComImport]
@@ -101,6 +119,11 @@ namespace Mobile_Money_Records_Reconciliator
         public interface IInitializeWithWindow
         {
             void Initialize(IntPtr hwnd);
+        }
+
+        private void ClearDocumentHistory_Click(object sender, RoutedEventArgs e)
+        {
+            Docs.Items.Clear();
         }
     }
 }
