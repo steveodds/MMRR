@@ -123,7 +123,12 @@ namespace Mobile_Money_Records_Reconciliator
 
         private void ClearDocumentHistory_Click(object sender, RoutedEventArgs e)
         {
-            Docs.Items.Clear();
+            if (Docs.IsEnabled)
+            {
+                Docs.Items.Clear();
+                Docs.Items.Add("You have no previous documents...");
+                Docs.IsEnabled = false;
+            }
         }
     }
 }
