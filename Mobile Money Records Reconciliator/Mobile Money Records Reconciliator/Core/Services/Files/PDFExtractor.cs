@@ -21,9 +21,9 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
             this.pdf = pdf;
         }
 
-        public Models.MpesaRecord ExtractRecordsAsync()
+        public async Task<Models.MpesaRecord> ExtractRecordsAsync()
         {
-            var results = GetAllPDFTextAsync(pdf.StatementPath).Result;
+            var results = await GetAllPDFTextAsync(pdf.StatementPath);
             return null;
         }
 
