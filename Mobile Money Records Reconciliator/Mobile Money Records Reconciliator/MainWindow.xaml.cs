@@ -96,7 +96,6 @@ namespace Mobile_Money_Records_Reconciliator
 
         private async void UpdateFiles(IntPtr windowHandle)
         {
-            IInitializeWithWindow initializeWithWindow;
             var extractor = new Core.Services.Files.PDFExtractor(statement);
             var result = extractor.ExtractRecordsAsync();
 
