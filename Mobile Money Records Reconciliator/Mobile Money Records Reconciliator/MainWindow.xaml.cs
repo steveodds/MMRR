@@ -101,10 +101,19 @@ namespace Mobile_Money_Records_Reconciliator
             var result = extractor.ExtractRecordsAsync();
 
             //TODO set MessageBox to match app scheme
-            var message = new MessageDialog("File has been successfully loaded!", "File Loaded");
-            initializeWithWindow = message.As<IInitializeWithWindow>();
-            initializeWithWindow.Initialize(windowHandle);
-            await message.ShowAsync();
+            ContentDialog fileLoadedDialog = new ContentDialog
+            {
+                Title = "File Loaded",
+                Content = $"File '{statement.FileName}' has been successfully loaded!",
+                CloseButtonText = "Ok"
+            };
+
+            if (Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 8))
+            {
+                fileLoadedDialog.XamlRoot = MainAppGrid.XamlRoot;
+            }
+            await fileLoadedDialog.ShowAsync();
+
             if (!Docs.IsEnabled)
             {
                 Docs.IsEnabled = true;
@@ -121,13 +130,37 @@ namespace Mobile_Money_Records_Reconciliator
             void Initialize(IntPtr hwnd);
         }
 
-        private void ClearDocumentHistory_Click(object sender, RoutedEventArgs e)
+        private async void ClearDocumentHistory_Click(object sender, RoutedEventArgs e)
         {
             if (Docs.IsEnabled)
             {
-                Docs.Items.Clear();
-                Docs.Items.Add("You have no previous documents...");
-                Docs.IsEnabled = false;
+                ContentDialog fileLoadedDialog = new ContentDialog
+                {
+                    Title = "Clear Document History",
+                    Content = $"Are you sure you want to clear your document history? This action is not reversible!",
+                    PrimaryButtonText = "Yes",
+                    CloseButtonText = "No",
+                    DefaultButton = ContentDialogButton.Close
+                };
+
+                if (Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 8))
+                {
+                    fileLoadedDialog.XamlRoot = MainAppGrid.XamlRoot;
+                }
+                var userResponse = await fileLoadedDialog.ShowAsync();
+                if (userResponse == ContentDialogResult.Primary)
+                {
+                    Docs.Items.Clear();
+                    Docs.Items.Add("You have no previous documents...");
+                    Docs.IsEnabled = false;
+                    var finalDialog = new ContentDialog();
+                    finalDialog.Content = "History cleared";
+                    finalDialog.Title = fileLoadedDialog.Title;
+                    finalDialog.CloseButtonText = "Close";
+                    if (Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 8))
+                        finalDialog.XamlRoot = MainAppGrid.XamlRoot;
+                    await finalDialog.ShowAsync();
+                }
             }
         }
     }
