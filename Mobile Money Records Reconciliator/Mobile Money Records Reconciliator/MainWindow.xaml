@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
 
-    <Grid Background="{ThemeResource RegionBrush}">
+    <Grid Background="{ThemeResource RegionBrush}" Name="MainAppGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <!--<RowDefinition Height="auto"/>-->

@@ -49,6 +49,7 @@ namespace Mobile_Money_Records_Reconciliator
             var windowNative = m_window.As<IWindowNative>();
 
             m_windowHandle = windowNative.WindowHandle;
+            m_window.Title = "MMRR";
             m_window.Activate();
         }
 
