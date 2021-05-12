@@ -97,10 +97,10 @@ namespace Mobile_Money_Records_Reconciliator
 
         private async void UpdateFiles(IntPtr windowHandle)
         {
+            statement.PassKey = await GetPasskey();
             var extractor = new Core.Services.Files.PDFExtractor(statement);
-            var result = extractor.ExtractRecordsAsync();
+            var result = await extractor.ExtractRecordsAsync();
 
-            //TODO set MessageBox to match app scheme
             ContentDialog fileLoadedDialog = new ContentDialog
             {
                 Title = "File Loaded",
@@ -114,7 +114,6 @@ namespace Mobile_Money_Records_Reconciliator
             }
             await fileLoadedDialog.ShowAsync();
 
-            var passkey = await GetPasskey();
 
             if (!Docs.IsEnabled)
             {
