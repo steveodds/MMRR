@@ -35,11 +35,22 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
 
         private async Task<StringBuilder> GetAllPDFTextAsync(string pdfPath)
         {
-            //TODO: Test
+            PdfReader pdfReader;
             await Task.Yield();
             var pageText = new StringBuilder();
-            using (PdfDocument pdfDocument = new PdfDocument(new PdfReader(pdfPath)))
+            if (pdf.PassKey != 0)
             {
+                var readerProperties = new ReaderProperties();
+                readerProperties.SetPassword(Encoding.UTF8.GetBytes(pdf.PassKey.ToString()));
+                pdfReader = new PdfReader(pdfPath, readerProperties);
+            }
+            else
+            {
+                pdfReader = new PdfReader(pdfPath);
+            }
+            using (PdfDocument pdfDocument = new PdfDocument(pdfReader))
+            {
+
                 var pageNumbers = pdfDocument.GetNumberOfPages();
                 for (int i = 1; i <= pageNumbers; i++)
                 {
