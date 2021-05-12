@@ -16,6 +16,7 @@ using Windows.Foundation.Collections;
 using muxc = Microsoft.UI.Xaml.Controls;
 using System.Runtime.InteropServices;
 using Windows.UI.Popups;
+using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -113,6 +114,8 @@ namespace Mobile_Money_Records_Reconciliator
             }
             await fileLoadedDialog.ShowAsync();
 
+            var passkey = await GetPasskey();
+
             if (!Docs.IsEnabled)
             {
                 Docs.IsEnabled = true;
@@ -129,6 +132,22 @@ namespace Mobile_Money_Records_Reconciliator
             void Initialize(IntPtr hwnd);
         }
 
+        private async Task<int> GetPasskey()
+        {
+
+
+            if (Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 8))
+            {
+                GetPin.XamlRoot = MainAppGrid.XamlRoot;
+            }
+            var userResponse = await GetPin.ShowAsync();
+            if (userResponse == ContentDialogResult.Primary)
+            {
+                return int.Parse(Passkey.Password.ToString());
+            }
+
+            return -1;
+        }
         private async void ClearDocumentHistory_Click(object sender, RoutedEventArgs e)
         {
             if (Docs.IsEnabled)

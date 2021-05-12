@@ -48,13 +48,13 @@
         <StackPanel Orientation="Vertical"
                     Grid.Row="1"
                     Padding="20">
-            
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                
+
                 <Grid Padding="10"
                       Grid.Column="0"
                       HorizontalAlignment="Left">
@@ -105,5 +105,17 @@
             </StackPanel>
         </StackPanel>
 
+        <!--Extra Items-->
+        <ContentDialog Name="GetPin"
+                       Title="PDF Password"
+                       PrimaryButtonText="Submit"
+                       CloseButtonText="Cancel">
+            <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Orientation="Vertical">
+                <TextBlock Text="Mpesa statements are password protected using your ID/passport. Please enter your ID/passport so that MMRR can read the pdf."
+                TextWrapping="Wrap" />
+                <TextBlock />
+                <PasswordBox Name="Passkey" PlaceholderText="Enter your password" />
+            </StackPanel>
+        </ContentDialog>
     </Grid>
 </Window>
