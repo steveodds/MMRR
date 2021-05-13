@@ -27,7 +27,7 @@
                 <muxc:NavigationViewItemSeparator/>
                 <muxc:NavigationViewItemHeader x:Name="MainPagesHeader"
                                            Content="Reconciliation:"/>
-                <muxc:NavigationViewItem Tag="apps" Content="Mpesa Statements">
+                <muxc:NavigationViewItem Tag="statements" Content="Mpesa Statements">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE9F9;"/>
                     </muxc:NavigationViewItem.Icon>
@@ -43,6 +43,10 @@
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
             </muxc:NavigationView.MenuItems>
+            <ScrollViewer>
+                <Frame x:Name="ContentFrame" Padding="12,0,12,24" IsTabStop="True"
+                   NavigationFailed="ContentFrame_NavigationFailed"/>
+            </ScrollViewer>
         </muxc:NavigationView>
 
         <StackPanel Orientation="Vertical"
