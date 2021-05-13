@@ -12,7 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <!--<RowDefinition Height="auto"/>-->
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <muxc:NavigationView x:Name="NavView"
@@ -55,52 +55,56 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Padding="10"
-                      Grid.Column="0"
+                <Border Grid.Column="0" BorderThickness="0.7" BorderBrush="Wheat" Margin="5">
+                    <Grid Padding="10"
                       HorizontalAlignment="Left">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="Transactions Data:" Grid.Row="0" FontWeight="Bold" FontSize="16"/>
-                    <TextBlock Text="Transaction Date Ranges:" Grid.Row="1"/>
-                    <StackPanel Orientation="Vertical"
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Transactions Data:" Grid.Row="0" FontWeight="Bold" FontSize="16"/>
+                        <TextBlock Text="Transaction Date Ranges:" Grid.Row="1"/>
+                        <StackPanel Orientation="Vertical"
                                 Grid.Row="2">
-                        <TextBlock Text="N/A"/>
-                    </StackPanel>
-                </Grid>
+                            <TextBlock Text="N/A"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
 
-                <Grid Padding="10"
-                      Grid.Column="1"
+                <Border Grid.Column="1" BorderThickness="0.7" BorderBrush="Wheat" Margin="5">
+                    <Grid Padding="10"
                       HorizontalAlignment="Left">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                    <TextBlock Text="Actions:" Grid.Row="0" FontWeight="Bold" FontSize="16"/>
-                    <Button Content="Load New Document" Click="LoadFile_Click" Grid.Row="1" Margin="5"/>
-                    <Button Content="Quick Re-Export" Grid.Row="2" Margin="5"/>
-                    <Button Content="Modify Last Document" Grid.Row="3" Margin="5"/>
-                    <Button Content="Clear Document History" Click="ClearDocumentHistory_Click" Grid.Row="4" Margin="5"/>
-                </Grid>
+                        <TextBlock Text="Actions:" Grid.Row="0" FontWeight="Bold" FontSize="16"/>
+                        <Button Content="Load New Document" Click="LoadFile_Click" Grid.Row="1" Margin="5"/>
+                        <Button Content="Quick Re-Export" Grid.Row="2" Margin="5"/>
+                        <Button Content="Modify Last Document" Grid.Row="3" Margin="5"/>
+                        <Button Content="Clear Document History" Click="ClearDocumentHistory_Click" Grid.Row="4" Margin="5"/>
+                    </Grid>
+                </Border>
             </Grid>
 
             <StackPanel Name="Documents">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition />
+                        <RowDefinition Height="125" />
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Previous documents:"/>
-                    <ListView Grid.Row="1" SelectionMode="Single" BorderThickness="1" CornerRadius="10" IsEnabled="False" x:Name="Docs">
-                        <ListViewItem Content="You have no previous documents..."/>
-                    </ListView>
+                    <Border Name="ListViewBorder" BorderThickness="0.7" BorderBrush="Wheat" CornerRadius="10" Grid.Row="1">
+                        <ListView SelectionMode="Single" BorderThickness="1" CornerRadius="10" IsEnabled="False" x:Name="Docs">
+                            <ListViewItem Content="You have no previous documents..."/>
+                        </ListView>
+                    </Border>
                 </Grid>
             </StackPanel>
         </StackPanel>
