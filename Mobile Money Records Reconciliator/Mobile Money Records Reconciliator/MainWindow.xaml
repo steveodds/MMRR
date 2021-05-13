@@ -55,7 +55,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" BorderThickness="0.7" BorderBrush="Wheat" Margin="5">
+                <Border Grid.Column="0" BorderThickness="0.7" BorderBrush="Wheat" Margin="5" CornerRadius="6">
                     <Grid Padding="10"
                       HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
@@ -72,7 +72,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Column="1" BorderThickness="0.7" BorderBrush="Wheat" Margin="5">
+                <Border Grid.Column="1" BorderThickness="0.7" BorderBrush="Wheat" Margin="5" CornerRadius="6">
                     <Grid Padding="10"
                       HorizontalAlignment="Left">
                         <Grid.RowDefinitions>
@@ -100,8 +100,8 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Text="Previous documents:"/>
-                    <Border Name="ListViewBorder" BorderThickness="0.7" BorderBrush="Wheat" CornerRadius="10" Grid.Row="1">
-                        <ListView SelectionMode="Single" BorderThickness="1" CornerRadius="10" IsEnabled="False" x:Name="Docs">
+                    <Border Name="ListViewBorder" BorderThickness="0.7" BorderBrush="Wheat" CornerRadius="6" Grid.Row="1">
+                        <ListView SelectionMode="Single" BorderThickness="1" CornerRadius="6" IsEnabled="False" x:Name="Docs">
                             <ListViewItem Content="You have no previous documents..."/>
                         </ListView>
                     </Border>

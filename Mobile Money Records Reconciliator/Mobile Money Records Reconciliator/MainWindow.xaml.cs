@@ -142,7 +142,9 @@ namespace Mobile_Money_Records_Reconciliator
             var userResponse = await GetPin.ShowAsync();
             if (userResponse == ContentDialogResult.Primary)
             {
-                return int.Parse(Passkey.Password.ToString());
+                var pin = int.Parse(Passkey.Password.ToString());
+                Passkey.Password = string.Empty;
+                return pin;
             }
 
             return -1;
