@@ -35,18 +35,20 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
 
         private async Task<StringBuilder> GetAllPDFTextAsync(string pdfPath)
         {
-            PdfReader pdfReader;
+            CustomPDFReader pdfReader;
             await Task.Yield();
             var pageText = new StringBuilder();
             if (pdf.PassKey != 0)
             {
                 var readerProperties = new ReaderProperties();
                 readerProperties.SetPassword(Encoding.UTF8.GetBytes(pdf.PassKey.ToString()));
-                pdfReader = new PdfReader(pdfPath, readerProperties);
+                pdfReader = new CustomPDFReader(pdfPath, readerProperties);
+                pdfReader.SetUnethicalReading(true);
+                pdfReader.EnableDecryption();
             }
             else
             {
-                pdfReader = new PdfReader(pdfPath);
+                pdfReader = new CustomPDFReader(pdfPath);
             }
             using (PdfDocument pdfDocument = new PdfDocument(pdfReader))
             {
@@ -64,5 +66,20 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
             return pageText;
         }
 
+        class CustomPDFReader : PdfReader
+        {
+            public CustomPDFReader(string pdf) : base(pdf)
+            {
+            }
+
+            public CustomPDFReader(string pdf, ReaderProperties properties) : base(pdf, properties)
+            {
+            }
+
+            public void EnableDecryption()
+            {
+                encrypted = false;
+            }
+        }
     }
 }
