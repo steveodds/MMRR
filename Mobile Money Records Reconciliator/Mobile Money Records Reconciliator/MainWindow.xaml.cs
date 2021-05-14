@@ -73,6 +73,7 @@ namespace Mobile_Money_Records_Reconciliator
             {
                 var navItemTag = args.InvokedItemContainer.Tag.ToString();
                 NavView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
+                NavView.Header = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(navItemTag);
             }
         }
 
