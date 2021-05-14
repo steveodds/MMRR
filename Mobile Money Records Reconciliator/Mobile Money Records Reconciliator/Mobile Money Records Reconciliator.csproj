@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Core\CustomResourceDictionary\FluentTheme.xaml" />
+    <None Remove="Pages\Dashboard.xaml" />
     <None Remove="Pages\MpesaStatements.xaml" />
   </ItemGroup>
 
@@ -29,6 +30,12 @@
 
   <ItemGroup>
     <Folder Include="Core\Services\Database\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\Dashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>
