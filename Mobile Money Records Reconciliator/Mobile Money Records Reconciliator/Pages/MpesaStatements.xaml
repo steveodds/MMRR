@@ -9,6 +9,34 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Name="MpesaStatementsGrid" Background="{ThemeResource RegionBrush}">
-        <TextBlock Text="TEST"/>
+        <StackPanel Padding="20" Orientation="Vertical">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Vertical" Grid.Column="0">
+                    <TextBlock FontSize="16" FontWeight="Bold" Text="Summary:" />
+                    <TextBlock>
+                        <Span x:Name="DefaultSummarySpan">No data</Span>
+                    </TextBlock>
+                </StackPanel>
+                
+                <StackPanel Orientation="Vertical" Grid.Column="1">
+                    <TextBlock FontSize="16" FontWeight="Bold" Text="Properties:" />
+                    <TextBlock>
+                        <Span x:Name="DefaultSpan">No data</Span>
+                    </TextBlock>
+                </StackPanel>
+                
+            </Grid>
+
+            <StackPanel>
+                <TextBlock Name="StatementsDisplay" />
+            </StackPanel>
+            
+        </StackPanel>
     </Grid>
 </Page>
