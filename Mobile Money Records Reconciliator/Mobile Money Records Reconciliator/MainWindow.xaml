@@ -9,19 +9,13 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
 
     <Grid Background="{ThemeResource RegionBrush}" Name="MainAppGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <!--<RowDefinition Height="auto"/>-->
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
         <muxc:NavigationView x:Name="NavView"
                          PaneDisplayMode="Top"
                          Loaded="NavView_Loaded"
                          Header="Home"
                          ItemInvoked="NavView_ItemInvoked"
-                         BackRequested="NavView_BackRequested"
-                         Grid.Row="0">
+                         BackRequested="NavView_BackRequested">
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem Tag="home" Icon="Home" Content="Dashboard"/>
                 <muxc:NavigationViewItemSeparator/>
@@ -43,87 +37,8 @@
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
             </muxc:NavigationView.MenuItems>
-            <ScrollViewer>
-                <Frame x:Name="ContentFrame" Padding="12,0,12,24" IsTabStop="True"
+            <Frame Background="{ThemeResource RegionBrush}" x:Name="ContentFrame" IsTabStop="True"
                    NavigationFailed="ContentFrame_NavigationFailed"/>
-            </ScrollViewer>
         </muxc:NavigationView>
-
-        <StackPanel Orientation="Vertical"
-                    Grid.Row="1"
-                    Padding="20">
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <Border Grid.Column="0" BorderThickness="0.7" BorderBrush="Wheat" Margin="5" CornerRadius="6">
-                    <Grid Padding="10"
-                      HorizontalAlignment="Left">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Transactions Data:" Grid.Row="0" FontWeight="Bold" FontSize="16"/>
-                        <TextBlock Text="Transaction Date Ranges:" Grid.Row="1"/>
-                        <StackPanel Orientation="Vertical"
-                                Grid.Row="2">
-                            <TextBlock Text="N/A"/>
-                        </StackPanel>
-                    </Grid>
-                </Border>
-
-                <Border Grid.Column="1" BorderThickness="0.7" BorderBrush="Wheat" Margin="5" CornerRadius="6">
-                    <Grid Padding="10"
-                      HorizontalAlignment="Left">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Text="Actions:" Grid.Row="0" FontWeight="Bold" FontSize="16"/>
-                        <Button Content="Load New Document" Click="LoadFile_Click" Grid.Row="1" Margin="5"/>
-                        <Button Content="Quick Re-Export" Grid.Row="2" Margin="5"/>
-                        <Button Content="Modify Last Document" Grid.Row="3" Margin="5"/>
-                        <Button Content="Clear Document History" Click="ClearDocumentHistory_Click" Grid.Row="4" Margin="5"/>
-                    </Grid>
-                </Border>
-            </Grid>
-
-            <StackPanel Name="Documents">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="125" />
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Grid.Row="0" Text="Previous documents:"/>
-                    <Border Name="ListViewBorder" BorderThickness="0.7" BorderBrush="Wheat" CornerRadius="6" Grid.Row="1">
-                        <ListView SelectionMode="Single" BorderThickness="1" CornerRadius="6" IsEnabled="False" x:Name="Docs">
-                            <ListViewItem Content="You have no previous documents..."/>
-                        </ListView>
-                    </Border>
-                </Grid>
-            </StackPanel>
-        </StackPanel>
-
-        <!--Extra Items-->
-        <ContentDialog Name="GetPin"
-                       Title="PDF Password"
-                       PrimaryButtonText="Submit"
-                       CloseButtonText="Cancel">
-            <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Orientation="Vertical">
-                <TextBlock Text="Mpesa statements are password protected using your ID/passport. Please enter your ID/passport so that MMRR can read the pdf."
-                TextWrapping="Wrap" />
-                <TextBlock />
-                <PasswordBox Name="Passkey" PlaceholderText="Enter your password" />
-            </StackPanel>
-        </ContentDialog>
     </Grid>
 </Window>
