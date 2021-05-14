@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Name="MpesaStatementsGrid" Background="{ThemeResource RegionBrush}">
         <TextBlock Text="TEST"/>
     </Grid>
 </Page>
