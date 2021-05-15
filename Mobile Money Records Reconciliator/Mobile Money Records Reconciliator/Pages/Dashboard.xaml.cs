@@ -29,11 +29,28 @@ namespace Mobile_Money_Records_Reconciliator.Pages
     {
         //Required models
         private Core.Models.PDFStatement statement;
+        private Dictionary<string, object> _pageData;
+
         //End
+        private Frame MainFrame;
+        private NavigationView NavView;
         public Dashboard()
         {
             this.InitializeComponent();
             statement = new Core.Models.PDFStatement();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            _pageData = (Dictionary<string, object>)e.Parameter;
+            MainFrame = (Frame)_pageData["Frame"];
+            NavView = (NavigationView)_pageData["NavView"];
+            if(NavView is not null)
+            {
+                NavView.SelectedItem = NavView.MenuItems[0];
+                NavView.Header = "Dashboard";
+            }
         }
 
         //Core Functionality
@@ -78,18 +95,7 @@ namespace Mobile_Money_Records_Reconciliator.Pages
             var extractor = new Core.Services.Files.PDFExtractor(statement);
             var result = await extractor.ExtractRecordsAsync();
 
-            ContentDialog fileLoadedDialog = new ContentDialog
-            {
-                Title = "File Loaded",
-                Content = $"File '{statement.FileName}' has been successfully loaded!",
-                CloseButtonText = "Ok"
-            };
-
-            if (Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 8))
-            {
-                fileLoadedDialog.XamlRoot = DashboardGrid.XamlRoot;
-            }
-            await fileLoadedDialog.ShowAsync();
+            (App.Current as App).SharedDataDump = result;
 
 
             if (!Docs.IsEnabled)
@@ -98,7 +104,13 @@ namespace Mobile_Money_Records_Reconciliator.Pages
                 Docs.Items.Clear();
             }
             Docs.Items.Add(statement.FileName);
+
+            if (MainFrame is not null)
+                MainFrame.Navigate(typeof(MpesaStatements), _pageData);
+
         }
+
+        
 
         [ComImport]
         [Guid("3E68D4BD-7135-4D10-8018-9FB6D9F33FA1")]
