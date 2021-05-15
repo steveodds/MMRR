@@ -24,6 +24,7 @@ namespace Mobile_Money_Records_Reconciliator.Pages
     public sealed partial class MpesaStatements : Page
     {
         private Dictionary<string, object> _pageData;
+        public List<Core.Models.MpesaRecord> MpesaRecords { get; set; }
 
         private Frame MainFrame { get; set; }
         private NavigationView NavView { get; set; }
@@ -31,6 +32,14 @@ namespace Mobile_Money_Records_Reconciliator.Pages
         public MpesaStatements()
         {
             this.InitializeComponent();
+            MpesaRecords = new();
+            MpesaRecords.AddRange(
+                new List<Core.Models.MpesaRecord>
+                {
+                    new Core.Models.MpesaRecord { Amount = 3200, Balance = 0, Charges = 23, CompletionTime = DateTime.Now, Description = "Goods", ReceiptNo = "RB98675RG", RecordType = Core.Enums.TransactionType.Expense, Status = "Completed", TotalAmount = 3223 },
+                    new Core.Models.MpesaRecord { Amount = 768, Balance = 100, Charges = 23, CompletionTime = DateTime.Now.AddDays(-1), Description = "Services", ReceiptNo = "UY98675RG", RecordType = Core.Enums.TransactionType.Expense, Status = "Completed", TotalAmount = 9876 }
+                }
+                );
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -44,6 +53,27 @@ namespace Mobile_Money_Records_Reconciliator.Pages
             {
                 NavView.SelectedItem = NavView.MenuItems[3];
                 NavView.Header = "Statements";
+            }
+        }
+
+        private void dataGrid_AutoGeneratingColumn(object sender, CommunityToolkit.WinUI.UI.Controls.DataGridAutoGeneratingColumnEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "ReceiptNo":
+                    e.Column.Header = "Receipt No.";
+                    break;
+                case "CompletionTime":
+                    e.Column.Header = "Completion Time";
+                    break;
+                case "RecordType":
+                    e.Column.Header = "Record Type";
+                    break;
+                case "TotalAmount":
+                    e.Column.Header = "Total Amount";
+                    break;
+                default:
+                    break;
             }
         }
     }
