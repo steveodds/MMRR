@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mobile_Money_Records_Reconciliator.Core.Models
 {
-    class FinalFile
+    public class FinalFile
     {
         public Guid FileID { get; set; }
         public string FinalFilePath { get; set; }

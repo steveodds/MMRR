@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mobile_Money_Records_Reconciliator.Core.Models
 {
-    class MpesaRecord
+    public class MpesaRecord
     {
         public string ReceiptNo { get; set; }
         public DateTime CompletionTime { get; set; }
