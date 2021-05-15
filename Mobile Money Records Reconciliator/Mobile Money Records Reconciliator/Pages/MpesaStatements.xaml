@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Name="MpesaStatementsGrid" Background="{ThemeResource RegionBrush}">
@@ -23,20 +24,52 @@
                         <Span x:Name="DefaultSummarySpan">No data</Span>
                     </TextBlock>
                 </StackPanel>
-                
+
                 <StackPanel Orientation="Vertical" Grid.Column="1">
                     <TextBlock FontSize="16" FontWeight="Bold" Text="Properties:" />
                     <TextBlock>
                         <Span x:Name="DefaultSpan">No data</Span>
                     </TextBlock>
                 </StackPanel>
-                
+
             </Grid>
 
-            <StackPanel>
-                <TextBlock Name="StatementsDisplay" />
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Statements:" />
+                <Grid>
+                    <controls:DataGrid
+                        x:Name="dataGrid"
+                        Margin="12"
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                        HorizontalScrollBarVisibility="Visible"
+                        VerticalScrollBarVisibility="Visible"
+                        AlternatingRowBackground="Transparent"
+                        AlternatingRowForeground="Fuchsia"
+                        AreRowDetailsFrozen="False"
+                        AreRowGroupHeadersFrozen="True"
+                        AutoGenerateColumns="False"
+                        CanUserSortColumns="False"
+                        CanUserReorderColumns="False"
+                        CanUserResizeColumns="True"
+                        ColumnHeaderHeight="32"
+                        MaxColumnWidth="400"
+                        FrozenColumnCount="0"
+                        GridLinesVisibility="All"
+                        HeadersVisibility="Column"
+                        IsReadOnly="True"
+                        SelectionMode="Single"
+                        RowGroupHeaderPropertyNameAlternative="Range">
+                        <controls:DataGrid.Columns>
+                            <controls:DataGridTextColumn Header="Rank" Binding="{Binding Rank}" Tag="Rank" />
+                            <controls:DataGridComboBoxColumn Header="Mountain" Binding="{Binding Mountain}" Tag="Mountain" />
+                            <controls:DataGridTextColumn Header="Height (m)" Binding="{Binding Height_m}" Tag="Height_m" />
+                            <controls:DataGridTextColumn Header="Range" Binding="{Binding Range}" Tag="Range" />
+                            <controls:DataGridTextColumn Header="Parent Mountain" Binding="{Binding Parent_mountain}" Tag="Parent_mountain" />
+                        </controls:DataGrid.Columns>
+                    </controls:DataGrid>
+                </Grid>
             </StackPanel>
-            
+
         </StackPanel>
     </Grid>
 </Page>

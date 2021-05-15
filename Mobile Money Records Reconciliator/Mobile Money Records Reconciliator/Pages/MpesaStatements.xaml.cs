@@ -31,9 +31,6 @@ namespace Mobile_Money_Records_Reconciliator.Pages
         public MpesaStatements()
         {
             this.InitializeComponent();
-            var statementDump = (App.Current as App).SharedDataDump;
-            if (!string.IsNullOrEmpty(statementDump))
-                StatementsDisplay.Text = statementDump;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
