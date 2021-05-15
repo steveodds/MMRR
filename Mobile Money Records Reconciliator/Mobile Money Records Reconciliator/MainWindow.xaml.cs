@@ -19,7 +19,6 @@ using Windows.UI.Popups;
 using System.Threading.Tasks;
 using Mobile_Money_Records_Reconciliator.Pages;
 using Windows.UI.Core;
-
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -30,10 +29,14 @@ namespace Mobile_Money_Records_Reconciliator
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        
+
+        public string TempDataDump { get; set; }
+        private Dictionary<string, object> _pageData;
         public MainWindow()
         {
             this.InitializeComponent();
+            NavView.Loaded += NavView_Loaded;
+            _pageData = new();
         }
 
         private double NavViewCompactModeThresholdWidth { get { return NavView.CompactModeThresholdWidth; } }
@@ -68,6 +71,7 @@ namespace Mobile_Money_Records_Reconciliator
             if (args.IsSettingsInvoked == true)
             {
                 NavView_Navigate("settings", args.RecommendedNavigationTransitionInfo);
+                NavView.Header = "Settings";
             }
             else if (args.InvokedItemContainer != null)
             {
@@ -101,6 +105,10 @@ namespace Mobile_Money_Records_Reconciliator
     Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo transitionInfo)
         {
             Type _page = null;
+
+            _pageData["NavView"] = NavView;
+            _pageData["Frame"] = ContentFrame;
+
             if (navItemTag == "settings")
             {
                 //_page = typeof(SettingsPage);
@@ -117,7 +125,8 @@ namespace Mobile_Money_Records_Reconciliator
             // Only navigate if the selected page isn't currently loaded.
             if (!(_page is null) && !Type.Equals(preNavPageType, _page))
             {
-                ContentFrame.Navigate(_page, null, transitionInfo);
+                NavView.Loaded -= NavView_Loaded;
+                ContentFrame.Navigate(_page, _pageData, transitionInfo);
             }
         }
 
