@@ -12,7 +12,6 @@
 
         <muxc:NavigationView x:Name="NavView"
                          PaneDisplayMode="Top"
-                         Loaded="NavView_Loaded"
                          Header="Home"
                          ItemInvoked="NavView_ItemInvoked"
                          BackRequested="NavView_BackRequested">
