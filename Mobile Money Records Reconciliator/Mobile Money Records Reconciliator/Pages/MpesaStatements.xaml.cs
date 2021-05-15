@@ -23,9 +23,31 @@ namespace Mobile_Money_Records_Reconciliator.Pages
     /// </summary>
     public sealed partial class MpesaStatements : Page
     {
+        private Dictionary<string, object> _pageData;
+
+        private Frame MainFrame { get; set; }
+        private NavigationView NavView { get; set; }
+
         public MpesaStatements()
         {
             this.InitializeComponent();
+            var statementDump = (App.Current as App).SharedDataDump;
+            if (!string.IsNullOrEmpty(statementDump))
+                StatementsDisplay.Text = statementDump;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            _pageData = (Dictionary<string, object>)e.Parameter;
+            MainFrame = (Frame)_pageData["Frame"];
+            NavView = (NavigationView)_pageData["NavView"];
+            if (NavView is not null)
+            {
+                NavView.SelectedItem = NavView.MenuItems[3];
+                NavView.Header = "Statements";
+            }
         }
     }
 }
