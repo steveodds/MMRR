@@ -44,10 +44,11 @@
                         HorizontalScrollBarVisibility="Visible"
                         VerticalScrollBarVisibility="Visible"
                         AlternatingRowBackground="Transparent"
-                        AlternatingRowForeground="Fuchsia"
+                        AlternatingRowForeground="Black"
                         AreRowDetailsFrozen="False"
                         AreRowGroupHeadersFrozen="True"
-                        AutoGenerateColumns="False"
+                        AutoGenerateColumns="True"
+                        AutoGeneratingColumn="dataGrid_AutoGeneratingColumn"
                         CanUserSortColumns="False"
                         CanUserReorderColumns="False"
                         CanUserResizeColumns="True"
@@ -58,14 +59,8 @@
                         HeadersVisibility="Column"
                         IsReadOnly="True"
                         SelectionMode="Single"
-                        RowGroupHeaderPropertyNameAlternative="Range">
-                        <controls:DataGrid.Columns>
-                            <controls:DataGridTextColumn Header="Rank" Binding="{Binding Rank}" Tag="Rank" />
-                            <controls:DataGridComboBoxColumn Header="Mountain" Binding="{Binding Mountain}" Tag="Mountain" />
-                            <controls:DataGridTextColumn Header="Height (m)" Binding="{Binding Height_m}" Tag="Height_m" />
-                            <controls:DataGridTextColumn Header="Range" Binding="{Binding Range}" Tag="Range" />
-                            <controls:DataGridTextColumn Header="Parent Mountain" Binding="{Binding Parent_mountain}" Tag="Parent_mountain" />
-                        </controls:DataGrid.Columns>
+                        RowGroupHeaderPropertyNameAlternative="Range"
+                        ItemsSource="{x:Bind MpesaRecords}">
                     </controls:DataGrid>
                 </Grid>
             </StackPanel>
