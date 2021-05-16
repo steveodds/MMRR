@@ -53,9 +53,24 @@ namespace Mobile_Money_Records_Reconciliator.Pages
             {
                 var generateStatements = new Core.Services.Files.StatementsExtractor(pdfText);
                 var fullStatements = generateStatements.GetMpesaRecords().Result;
-                MpesaRecords = fullStatements.MpesaRecords;
-
+                MpesaRecords.AddRange(fullStatements.MpesaRecords.Take(5));
+                UpdatePageDetails(fullStatements);
             }
+        }
+
+        private void UpdatePageDetails(Core.Models.StatementsData fullStatements)
+        {
+            CustName.Text = fullStatements.CustomerName;
+            Mobile.Text = fullStatements.MobileNumber;
+            Email.Text = fullStatements.EmailAddress;
+            StatementDate.Text = fullStatements.StatementDate.ToShortDateString();
+            StatementPeriod.Text = fullStatements.StatementPeriod;
+
+            Sent_Received.Text = fullStatements.TotalSent + " | " + fullStatements.TotalReceived;
+            Dep_Withdrawn.Text = fullStatements.TotalDeposited + " | " + fullStatements.TotalWithdrawn;
+            Paybill_BuyGoods.Text = fullStatements.PaybillTotal + " | " + fullStatements.BuyGoodsTotal;
+            Others.Text = fullStatements.OthersIn + " | " + fullStatements.OthersOut;
+            Total.Text = fullStatements.TotalIn + " | " + fullStatements.TotalOut;
         }
 
         private void dataGrid_AutoGeneratingColumn(object sender, CommunityToolkit.WinUI.UI.Controls.DataGridAutoGeneratingColumnEventArgs e)
