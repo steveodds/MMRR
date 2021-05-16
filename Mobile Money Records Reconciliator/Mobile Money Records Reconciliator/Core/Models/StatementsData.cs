@@ -22,7 +22,8 @@ namespace Mobile_Money_Records_Reconciliator.Core.Models
         public decimal TotalWithdrawn { get; set; }
         public decimal PaybillTotal { get; set; }
         public decimal BuyGoodsTotal { get; set; }
-        public decimal Others { get; set; }
+        public decimal OthersIn { get; set; }
+        public decimal OthersOut { get; set; }
         public decimal TotalIn { get; set; }
         public decimal TotalOut { get; set; }
 

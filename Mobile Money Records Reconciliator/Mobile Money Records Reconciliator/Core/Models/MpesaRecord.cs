@@ -13,9 +13,9 @@ namespace Mobile_Money_Records_Reconciliator.Core.Models
         public string Description { get; set; }
         public string Status { get; set; } //Failed or Succeeded
         public Enums.TransactionType RecordType { get; set; }
-        public int Amount { get; set; }
-        public int Charges { get; set; }
-        public int TotalAmount { get; set; }
-        public int Balance { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Charges { get; set; }
+        public decimal TotalAmount { get; set; }
+        public decimal Balance { get; set; }
     }
 }
