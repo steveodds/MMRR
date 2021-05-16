@@ -14,7 +14,6 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
     {
         //TODO: Flesh out
         private Models.PDFStatement pdf;
-        public List<Models.MpesaRecord> MpesaRecords { get; set; }
 
         public PDFExtractor(Models.PDFStatement pdf)
         {
@@ -27,6 +26,7 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
             return results.ToString();
         }
 
+        //TODO
         public Models.MpesaRecord ExtractSeveralRecords(List<Models.PDFStatement> pDFStatements)
         {
             return null;
