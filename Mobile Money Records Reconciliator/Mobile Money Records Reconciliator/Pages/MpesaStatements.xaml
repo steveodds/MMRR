@@ -17,25 +17,59 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-
-                <StackPanel Orientation="Vertical" Grid.Column="0">
-                    <TextBlock FontSize="16" FontWeight="Bold" Text="Summary:" />
-                    <TextBlock>
-                        <Span x:Name="DefaultSummarySpan">No data</Span>
-                    </TextBlock>
-                </StackPanel>
-
-                <StackPanel Orientation="Vertical" Grid.Column="1">
-                    <TextBlock FontSize="16" FontWeight="Bold" Text="Properties:" />
-                    <TextBlock>
-                        <Span x:Name="DefaultSpan">No data</Span>
-                    </TextBlock>
-                </StackPanel>
-
+                <Border Grid.Column="0" BorderThickness="0.7" BorderBrush="Wheat" Margin="5" CornerRadius="6">
+                    <StackPanel Orientation="Vertical" Grid.Column="0">
+                        <TextBlock FontSize="16" FontWeight="Bold" Text="Summary:" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Vertical" Grid.Column="0">
+                                <TextBlock>Sent/Received:</TextBlock>
+                                <TextBlock>Deposited/Withdrawn:</TextBlock>
+                                <TextBlock>Paybill/Buy Goods:</TextBlock>
+                                <TextBlock>Others (In/Out):</TextBlock>
+                                <TextBlock>Total (In/Out):</TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Grid.Column="1">
+                                <TextBlock x:Name="Sent_Received"/>
+                                <TextBlock x:Name="Dep_Withdrawn"/>
+                                <TextBlock x:Name="Paybill_BuyGoods"/>
+                                <TextBlock x:Name="Others"/>
+                                <TextBlock x:Name="Total"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="0" BorderThickness="0.7" BorderBrush="Wheat" Margin="5" CornerRadius="6">
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                        <TextBlock FontSize="16" FontWeight="Bold" Text="Details:" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Vertical" Grid.Column="0">
+                                <TextBlock>Customer Name:</TextBlock>
+                                <TextBlock>Mobile Number:</TextBlock>
+                                <TextBlock>Email Address:</TextBlock>
+                                <TextBlock>Date of Statement:</TextBlock>
+                                <TextBlock>Statement Period:</TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Grid.Column="1">
+                                <TextBlock x:Name="CustName"/>
+                                <TextBlock x:Name="Mobile"/>
+                                <TextBlock x:Name="Email"/>
+                                <TextBlock x:Name="StatementDate"/>
+                                <TextBlock x:Name="StatementPeriod"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
             </Grid>
 
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Statements:" />
+            <Border Grid.Column="1" BorderThickness="0.7" BorderBrush="Wheat" Margin="5" CornerRadius="6">
                 <Grid>
                     <controls:DataGrid
                         x:Name="dataGrid"
@@ -44,7 +78,7 @@
                         HorizontalScrollBarVisibility="Visible"
                         VerticalScrollBarVisibility="Visible"
                         AlternatingRowBackground="Transparent"
-                        AlternatingRowForeground="Black"
+                        AlternatingRowForeground="Gray"
                         AreRowDetailsFrozen="False"
                         AreRowGroupHeadersFrozen="True"
                         AutoGenerateColumns="True"
@@ -63,7 +97,7 @@
                         ItemsSource="{x:Bind MpesaRecords}">
                     </controls:DataGrid>
                 </Grid>
-            </StackPanel>
+            </Border>
 
         </StackPanel>
     </Grid>
