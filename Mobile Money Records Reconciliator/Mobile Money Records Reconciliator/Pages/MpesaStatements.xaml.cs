@@ -33,13 +33,7 @@ namespace Mobile_Money_Records_Reconciliator.Pages
         {
             this.InitializeComponent();
             MpesaRecords = new();
-            MpesaRecords.AddRange(
-                new List<Core.Models.MpesaRecord>
-                {
-                    new Core.Models.MpesaRecord { Amount = 3200, Balance = 0, Charges = 23, CompletionTime = DateTime.Now, Description = "Goods", ReceiptNo = "RB98675RG", RecordType = Core.Enums.TransactionType.Expense, Status = "Completed", TotalAmount = 3223 },
-                    new Core.Models.MpesaRecord { Amount = 768, Balance = 100, Charges = 23, CompletionTime = DateTime.Now.AddDays(-1), Description = "Services", ReceiptNo = "UY98675RG", RecordType = Core.Enums.TransactionType.Expense, Status = "Completed", TotalAmount = 9876 }
-                }
-                );
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -53,6 +47,14 @@ namespace Mobile_Money_Records_Reconciliator.Pages
             {
                 NavView.SelectedItem = NavView.MenuItems[3];
                 NavView.Header = "Statements";
+            }
+            var pdfText = (App.Current as App).SharedDataDump;
+            if (!string.IsNullOrWhiteSpace(pdfText))
+            {
+                var generateStatements = new Core.Services.Files.StatementsExtractor(pdfText);
+                var fullStatements = generateStatements.GetMpesaRecords().Result;
+                MpesaRecords = fullStatements.MpesaRecords;
+
             }
         }
 
