@@ -56,6 +56,7 @@ namespace Mobile_Money_Records_Reconciliator
         private Window m_window;
         private IntPtr m_windowHandle;
         public IntPtr WindowHandle { get { return m_windowHandle; } }
+        //TODO: Remove unnecessary fields
         public string SharedDataDump { get; set; }
 
         [ComImport]
