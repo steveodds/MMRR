@@ -58,7 +58,7 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
                 {
                     LocationTextExtractionStrategy strategy = new LocationTextExtractionStrategy();
                     PdfCanvasProcessor parser = new PdfCanvasProcessor(strategy);
-                    parser.ProcessPageContent(pdfDocument.GetFirstPage());
+                    parser.ProcessPageContent(pdfDocument.GetPage(i));
                     pageText.Append(strategy.GetResultantText());
                 }
             }
