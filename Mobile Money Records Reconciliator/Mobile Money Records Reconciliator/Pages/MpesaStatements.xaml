@@ -18,7 +18,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" BorderThickness="0.7" BorderBrush="Wheat" Margin="5" CornerRadius="6">
-                    <StackPanel Orientation="Vertical" Grid.Column="0">
+                    <StackPanel Orientation="Vertical" Grid.Column="0" Padding="10">
                         <TextBlock FontSize="16" FontWeight="Bold" Text="Summary:" />
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -42,8 +42,8 @@
                         </Grid>
                     </StackPanel>
                 </Border>
-                <Border Grid.Column="0" BorderThickness="0.7" BorderBrush="Wheat" Margin="5" CornerRadius="6">
-                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                <Border Grid.Column="1" BorderThickness="0.7" BorderBrush="Wheat" Margin="5" CornerRadius="6">
+                    <StackPanel Orientation="Vertical" Grid.Column="1" Padding="10">
                         <TextBlock FontSize="16" FontWeight="Bold" Text="Details:" />
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -69,9 +69,8 @@
                 </Border>
             </Grid>
 
-            <Border Grid.Column="1" BorderThickness="0.7" BorderBrush="Wheat" Margin="5" CornerRadius="6">
-                <Grid>
-                    <controls:DataGrid
+            <Border BorderThickness="0.7" BorderBrush="Wheat" Margin="5" CornerRadius="6">
+                <controls:DataGrid
                         x:Name="dataGrid"
                         Margin="12"
                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
@@ -95,8 +94,7 @@
                         SelectionMode="Single"
                         RowGroupHeaderPropertyNameAlternative="Range"
                         ItemsSource="{x:Bind MpesaRecords}">
-                    </controls:DataGrid>
-                </Grid>
+                </controls:DataGrid>
             </Border>
 
         </StackPanel>
