@@ -44,6 +44,7 @@ namespace Mobile_Money_Records_Reconciliator
         {
             ("home", typeof(Dashboard)),
             ("statements", typeof(MpesaStatements)),
+            ("export", typeof(Export)),
         };
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)

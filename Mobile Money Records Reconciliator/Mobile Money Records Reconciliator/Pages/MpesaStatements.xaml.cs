@@ -28,6 +28,7 @@ namespace Mobile_Money_Records_Reconciliator.Pages
 
         private Frame MainFrame { get; set; }
         private NavigationView NavView { get; set; }
+        private Core.Models.StatementsData FullStatements { get; set; }
 
         public MpesaStatements()
         {
@@ -52,12 +53,12 @@ namespace Mobile_Money_Records_Reconciliator.Pages
             if (!string.IsNullOrWhiteSpace(pdfText))
             {
                 var generateStatements = new Core.Services.Files.StatementsExtractor(pdfText);
-                var fullStatements = generateStatements.GetMpesaRecords().Result;
-                MpesaRecords.AddRange(fullStatements.MpesaRecords.Take(5));
-                UpdatePageDetails(fullStatements);
+                FullStatements = generateStatements.GetMpesaRecords().Result;
+                MpesaRecords.AddRange(FullStatements.MpesaRecords.Take(5));
+                UpdatePageDetails(FullStatements);
+                ToggleContinuePrompt.IsOpen = true;
             }
 
-            ToggleContinuePrompt.IsOpen = true;
         }
 
         private void UpdatePageDetails(Core.Models.StatementsData fullStatements)
@@ -98,7 +99,9 @@ namespace Mobile_Money_Records_Reconciliator.Pages
 
         private void ToggleContinuePrompt_ActionButtonClick(TeachingTip sender, object args)
         {
-
+            (App.Current as App).Statements = FullStatements;
+            if (MainFrame is not null)
+                MainFrame.Navigate(typeof(Export), _pageData);
         }
     }
 }
