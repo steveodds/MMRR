@@ -56,6 +56,8 @@ namespace Mobile_Money_Records_Reconciliator.Pages
                 MpesaRecords.AddRange(fullStatements.MpesaRecords.Take(5));
                 UpdatePageDetails(fullStatements);
             }
+
+            ToggleContinuePrompt.IsOpen = true;
         }
 
         private void UpdatePageDetails(Core.Models.StatementsData fullStatements)
@@ -92,6 +94,11 @@ namespace Mobile_Money_Records_Reconciliator.Pages
                 default:
                     break;
             }
+        }
+
+        private void ToggleContinuePrompt_ActionButtonClick(TeachingTip sender, object args)
+        {
+
         }
     }
 }

@@ -6,11 +6,22 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls" xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Name="MpesaStatementsGrid" Background="{ThemeResource RegionBrush}">
         <StackPanel Padding="20" Orientation="Vertical">
+            <muxc:TeachingTip 
+                x:Name="ToggleContinuePrompt"
+                Title="File Loaded."
+                Subtitle="File has been successfully loaded. Click continue to proceed."
+                PreferredPlacement="Center"
+                PlacementMargin="20"
+                IsLightDismissEnabled="False"
+                ActionButtonClick="ToggleContinuePrompt_ActionButtonClick"
+                ActionButtonContent="Continue"
+                CloseButtonContent="Cancel">
+            </muxc:TeachingTip>
 
             <Grid>
                 <Grid.ColumnDefinitions>
