@@ -17,5 +17,10 @@ namespace Mobile_Money_Records_Reconciliator.Core.Models
         public decimal Charges { get; set; }
         public decimal TotalAmount { get; set; }
         public decimal Balance { get; set; }
+
+        public override string ToString()
+        {
+            return $"{ReceiptNo}, {CompletionTime}, {Description.Replace(",", "")}, {Status}, {RecordType}, {Amount.ToString().Replace(",", "")}, {Charges.ToString().Replace(",", "")}, {TotalAmount.ToString().Replace(",", "")}, {Balance.ToString().Replace(",", "")},";
+        }
     }
 }
