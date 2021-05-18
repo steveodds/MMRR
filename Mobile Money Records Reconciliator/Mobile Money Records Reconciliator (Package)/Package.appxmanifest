@@ -8,8 +8,8 @@
 
   <Identity
     Name="fb1c8204-e8bf-4374-a341-f7af957df28b"
-    Publisher="CN=user"
-    Version="1.0.0.0" />
+    Publisher="CN=ODDS Developments"
+    Version="0.1.2.0" />
 
   <Properties>
     <DisplayName>Mobile Money Records Reconciliator (Package)</DisplayName>
