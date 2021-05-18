@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Mobile_Money_Records_Reconciliator.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,10 +28,14 @@ namespace Mobile_Money_Records_Reconciliator.Pages
 
         private Frame MainFrame { get; set; }
         private NavigationView NavView { get; set; }
+        private StatementsData Statements { get; set; }
+        private FinalFile _finalFile;
 
         public Export()
         {
             this.InitializeComponent();
+            _finalFile = new();
+            Statements = (App.Current as App).Statements;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -41,9 +46,23 @@ namespace Mobile_Money_Records_Reconciliator.Pages
             NavView = (NavigationView)_pageData["NavView"];
             if (NavView is not null)
             {
-                NavView.SelectedItem = NavView.MenuItems[3];
+                NavView.SelectedItem = NavView.MenuItems[4];
                 NavView.Header = "Export";
             }
+
+        }
+
+        private void ExportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(_finalFile.FinalFilePath))
+            {
+                var csv = new Core.Services.Files.CSVGenerator(Statements.MpesaRecords);
+                _finalFile = csv.GetCSV();
+            }
+            var process = new System.Diagnostics.Process();
+            process.StartInfo.UseShellExecute = true;
+            process.StartInfo.FileName = _finalFile.FinalFilePath;
+            process.Start();
         }
     }
 }
