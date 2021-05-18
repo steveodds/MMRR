@@ -20,12 +20,12 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
         }
 
 
-        public async Task<Models.FinalFile> GetCSV()
+        public FinalFile GetCSV()
         {
             if (_records is null)
                 throw new ArgumentException("There are no records to export.");
 
-            FinalFile finalFile = await GenerateCSV();
+            FinalFile finalFile = GenerateCSV();
 
             return finalFile;
         }
@@ -36,10 +36,10 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
             return path;
         }
 
-        private async Task<FinalFile> GenerateCSV()
+        private FinalFile GenerateCSV()
         {
             var finalFile = $@"{MPESA_EXPORT}\mpesa_records.csv";
-            File.Create(finalFile);
+            //File.Create(finalFile);
             //Add headers
             using (StreamWriter writer = File.CreateText(finalFile))
             {
@@ -51,7 +51,7 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
             {
                 foreach (var record in _records)
                 {
-                    await writer.WriteLineAsync(record.ToString());
+                    writer.WriteLine(record.ToString());
                 }
             }
 
