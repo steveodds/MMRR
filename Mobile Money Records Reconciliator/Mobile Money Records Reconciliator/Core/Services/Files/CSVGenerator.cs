@@ -39,7 +39,7 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
         private FinalFile GenerateCSV()
         {
             var finalFile = $@"{MPESA_EXPORT}\mpesa_records.csv";
-            //File.Create(finalFile);
+            File.Delete(finalFile);
             //Add headers
             using (StreamWriter writer = File.CreateText(finalFile))
             {
