@@ -20,12 +20,12 @@
                 <muxc:NavigationViewItemSeparator/>
                 <muxc:NavigationViewItemHeader x:Name="MainPagesHeader"
                                            Content="Reconciliation:"/>
-                <muxc:NavigationViewItem Tag="statements" Content="Mpesa Statements">
+                <muxc:NavigationViewItem IsEnabled="False" Tag="statements" Content="Mpesa Statements">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE9F9;"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItem Tag="export" Content="Finalize/Export">
+                <muxc:NavigationViewItem IsEnabled="False" Tag="export" Content="Finalize/Export">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF57E;"/>
                     </muxc:NavigationViewItem.Icon>
