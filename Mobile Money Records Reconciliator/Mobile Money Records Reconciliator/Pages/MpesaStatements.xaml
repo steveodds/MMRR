@@ -109,5 +109,14 @@
             </Border>
 
         </StackPanel>
+        <controls:Loading Name="LoadingControl">
+            <StackPanel Orientation="Horizontal" Padding="12">
+                <Grid Margin="0,0,8,0">
+                    <Image Source="../../Assets/ToolkitLogo.png" Height="50" />
+                    <ProgressRing IsActive="True" Foreground="Black" />
+                </Grid>
+                <TextBlock Text="It's ok, we are working on it :)" Foreground="White" VerticalAlignment="Center" />
+            </StackPanel>
+        </controls:Loading>
     </Grid>
 </Page>

@@ -41,6 +41,9 @@ namespace Mobile_Money_Records_Reconciliator.Pages
         {
             base.OnNavigatedTo(e);
 
+            //Show loading indicator
+            LoadingControl.IsLoading = true;
+
             _pageData = (Dictionary<string, object>)e.Parameter;
             MainFrame = (Frame)_pageData["Frame"];
             NavView = (NavigationView)_pageData["NavView"];
@@ -59,6 +62,7 @@ namespace Mobile_Money_Records_Reconciliator.Pages
                 ToggleContinuePrompt.IsOpen = true;
             }
 
+            LoadingControl.IsLoading = false;
         }
 
         private void UpdatePageDetails(Core.Models.StatementsData fullStatements)
