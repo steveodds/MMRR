@@ -36,7 +36,12 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
         {
             var isSummarySet = false;
             var isStatementSet = false;
-            var isStatementHeader = true;
+            var isStatementHeader = false;
+            var statementHeaders = new List<string> {
+                "Disclaimer: This record is produced for your personal use and is not transferable.",
+                "Safaricom Customer Care via Customercare@safaricom.co.ke",
+                "Twitter: @SafaricomLtd |@safaricom_care| www.facebook.com/safaricomltd | For self-help dial *234#"
+            };
             var text = _pdfText;
             var reader = new StringReader(text);
             var line = string.Empty;
@@ -67,14 +72,29 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
                 }
                 else if (isStatementSet)
                 {
-                    //Get detailed transactions
+                    //Skip unwanted lines
+                    var current = line.ToLower();
+                    foreach (var header in statementHeaders)
+                    {
+                        if (current.Contains(header.ToLower()))
+                        {
+                            isStatementHeader = true;
+                            break;
+                        }
+                    }
                     if(isStatementHeader)
                     {
-                        var current = line.ToLower();
-                        isStatementHeader = current.Contains("receipt no.") || current.Contains("status");
-                        if (isStatementHeader)
-                            continue;
+                        isStatementHeader = false;
+                        continue;
                     }
+
+                    if (current.Contains("receipt no.") && current.Contains("completion time"))
+                        continue;
+                    else if (current.Contains("page") && current.Contains("of"))
+                        continue;
+                    else if (current.Trim() == "status")
+                        continue;
+                    //Get detailed transactions
                     SetStatementDetails(line);
                 }
             }
@@ -165,7 +185,7 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
                     {
                         temp = line.Remove(0, 5).Trim();
                         string[] amounts = temp.Split(' ');
-                        FullStatements.TotalIn= decimal.Parse(amounts[0].Trim());
+                        FullStatements.TotalIn = decimal.Parse(amounts[0].Trim());
                         FullStatements.TotalOut = decimal.Parse(amounts[1].Trim());
                         break;
                     }
@@ -179,7 +199,7 @@ namespace Mobile_Money_Records_Reconciliator.Core.Services.Files
         {
             var transaction = new MpesaRecord();
             string tempLine;
-            if(!line.Any(char.IsDigit)|| line.Length < 10 || line.Substring(0, 11).Trim().Length != 10)
+            if (!line.Any(char.IsDigit) || line.Length <= 10 || line.Substring(0, 11).Trim().Length != 10)
             {
                 //Handle overflown transactions
                 var lastTransaction = MpesaRecords.First(x => x.ReceiptNo == _lastTransactionNo);
